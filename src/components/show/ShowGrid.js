@@ -1,11 +1,13 @@
 import React from "react";
 import ShowCard from "./ShowCard";
 
+import { FlexGrid } from "../styled";
+
 import IMAGE_NOT_FOUND from "../../image/not-found.png";
 
 const ShowGrid = ({ data }) => {
   return (
-    <div>
+    <FlexGrid>
       {
         //    <img src={IMAGE_NOT_FOUND} />
         data.map(({ show }) => (
@@ -18,7 +20,7 @@ const ShowGrid = ({ data }) => {
           />
         ))
       }
-    </div>
+    </FlexGrid>
   );
 };
 
