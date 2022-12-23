@@ -2,7 +2,7 @@ import { useReducer, useEffect } from "react";
 
 function showReducer(prevState, action) {
   switch (action.type) {
-    case "Add": {
+    case "ADD": {
       return [...prevState, action.showId];
     }
     case "REMOVE": {
@@ -16,9 +16,11 @@ function showReducer(prevState, action) {
 
 function usePersistedReducer(reducer, initialState, key) {
   const [state, dispatch] = useReducer(reducer, initialState, (initial) => {
-    const persisted = localStorage.getItem(key);
-    return persisted ? JSON.parse(persisted) : initial;
+    const Persisted = localStorage.getItem(key);
+
+    return Persisted ? JSON.parse(Persisted) : initial;
   });
+
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(state));
   }, [state, key]);
@@ -26,6 +28,6 @@ function usePersistedReducer(reducer, initialState, key) {
   return [state, dispatch];
 }
 
-export function useShow(key = "shows") {
+export function useShows(key = "shows") {
   return usePersistedReducer(showReducer, [], key);
 }

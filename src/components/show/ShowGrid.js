@@ -5,21 +5,36 @@ import { FlexGrid } from "../styled";
 
 import IMAGE_NOT_FOUND from "../../image/not-found.png";
 
+import { useShows } from "../../misc/custom-hooks";
+
 const ShowGrid = ({ data }) => {
+  const [starredShows, dispatchStarred] = useShows();
+
   return (
     <FlexGrid>
-      {
-        //    <img src={IMAGE_NOT_FOUND} />
-        data.map(({ show }) => (
+      {data.map(({ show }) => {
+        const isStarred = starredShows.includes(show.id);
+
+        const OnStarClick = () => {
+          if (isStarred) {
+            dispatchStarred({ type: "REMOVE", showId: show.id });
+          } else {
+            dispatchStarred({ type: "ADD", showId: show.id });
+          }
+        };
+
+        return (
           <ShowCard
             key={show.id}
             id={show.id}
             name={show.name}
             image={show.image ? show.image.medium : IMAGE_NOT_FOUND}
             summary={show.summary}
+            OnStarClick={OnStarClick}
+            isStarred={isStarred}
           />
-        ))
-      }
+        );
+      })}
     </FlexGrid>
   );
 };
