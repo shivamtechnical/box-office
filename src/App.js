@@ -13,7 +13,7 @@ function App() {
 
         <Route exact path="/Started" element={<Started />}></Route>
 
-        <Route exact path="/Show/:id" element={<Show />}></Route>
+        <Route exact path="/show/:id" element={<Show />}></Route>
 
         <Route> this is error</Route>
       </Routes>
